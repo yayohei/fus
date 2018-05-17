@@ -8,6 +8,7 @@ module Fus
       path = File.expand_path(path)
       @swift_paths = Dir
           .glob("#{path}/**/*.swift")
+          .select {|path| File.file?(path) }
           .select {|path| path.scan(/\/Pods\//).empty? }
           .select {|path| path.scan(/\/Carthage\//).empty? }
       @obj_c_paths = Dir.glob("#{path}/**/*.m") + Dir.glob("#{path}/**/*.h")
